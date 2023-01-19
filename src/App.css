@@ -1,3 +1,7 @@
+body {
+  background-color: #F0F0F0;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -144,7 +148,7 @@ button.back-button a, .border a{
 
 .wrapper {
   background-color: #F0F0F0;
-  height: 45em;
+  min-height: 100px;
 }
 
 .country-main-info h3 {
@@ -157,4 +161,70 @@ button.back-button a, .border a{
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: var(--placeholder-color);
+}
+
+.weather-info-wrapper {
+  min-height: 100px;
+}
+
+.weather-info {
+  width: 22.5%;
+  height: 15em;
+  background-color: gray;
+  margin: 5em auto;
+  border-radius: 5px;
+  padding: 0 2em;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather {
+  padding-top: 2em;
+}
+
+.temperature {
+  font-size: 4em;
+  letter-spacing: -5px;
+  width: auto;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forecast-info {
+  display: flex;
+  justify-content: space-between;
+  height: 4em;
+  background-color: white;
+  margin: 0.5em 3em 0.5em 3em;
+  border-radius: 5px;
+}
+
+.forecast-pic {
+  height: 2em;
+}
+
+.forecast-weather {
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+}
+
+.forecast-weather p{
+  padding-left: 1em;
+}
+
+.forecast-details {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.forecast-details span {
+  padding-right: 1em;
 }
