@@ -182,7 +182,7 @@ button.back-button a, .border a{
 }
 
 .weather {
-  padding-top: 2em;
+  font-size: 2em;
 }
 
 .temperature {
@@ -227,4 +227,18 @@ button.back-button a, .border a{
 
 .forecast-details span {
   padding-right: 1em;
+}
+
+.daily-grid {
+  grid-row-gap: 0;
+  grid-column-gap: 15px;
+  column-gap: 15px;
+  display: grid;
+  flex: 1 1;
+  grid-template-columns: auto auto;
+  padding: 1em 4em;
+}
+
+.daily-items {
+  height: 2em;
 }

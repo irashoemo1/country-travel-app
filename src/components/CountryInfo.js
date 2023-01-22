@@ -22,11 +22,16 @@ const CountryInfo = (props)  => {
         setData(result.data);
         setIsLoading(false)
         // console.log(result.data)
+        // console.log(typeof result.data[0])
         currencies = Object.values(result.data[0].currencies).map((c) => c.name).join(', ');
         languages = Object.values(result.data[0].languages).join(', ')
         nativeName = Object.values(result.data[0].name.nativeName).map((c) => c.official)[0];
         borders = result.data[0].borders.map((c) => c)
-        // await fetchWeather(result.data)
+        
+        if(Object.keys(result.data).length > 0){
+          await fetchWeather(result.data)
+        }
+        
       }catch(error){
         setIsLoading(false)
         setIsError(error.message)
@@ -37,19 +42,15 @@ const CountryInfo = (props)  => {
     //Jan 19 at 1 am to Jan 23 at 10pm. Goes for every 3 hours. Mod by 8 to get everyday
     const fetchWeather = async (countryData) => {
       try{
-        console.log(countryData[0].latlng)
+        // console.log(countryData[0].latlng)
         const [lat, lng] = countryData[0].latlng
-        console.log(lat)
-        console.log(lng)
+        // console.log(lat)
+        // console.log(lng)
         const key = 'd4f35e7b6f0b7e9728dff15cfbf1980e'
-        const result = await axios(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${key}`)
+        const result = await axios(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&appid=${key}`)
 
         setWeather(result.data)
-        console.log(result.data)
-        console.log(result.data.list[0].main.temp)
-        console.log(result.data.list[0].main.feels_like)
-        console.log(result.data.list[0].weather[0].main)
-        console.log(result.data.list[0].weather[0].description)
+        // console.log(result.data)
         setIsLoading(false)
       }catch(error){
         setIsLoading(false)
@@ -78,6 +79,7 @@ const CountryInfo = (props)  => {
     const nLinkStyle = {
       color: darkTheme ? 'white': ''
     }
+    // console.log(typeof weather)
     return (
       <ThemeContext.Provider value={darkTheme}>
         <div style={otherStyles}>
@@ -101,7 +103,7 @@ const CountryInfo = (props)  => {
                         <span>{nativeName}</span>
                       </h3>
                       <h3>Population:{' '} 
-                        <span>{country.population}</span>
+                        <span>{country.population.toLocaleString(undefined)}</span>
                       </h3>
                       <h3>Region:{' '}  
                         <span>{country.region}</span>
@@ -131,7 +133,7 @@ const CountryInfo = (props)  => {
                 </div> 
               )
             })}
-            <Weather />
+            {Object.keys(weather).length > 0  && <Weather weather={weather} />}
           </div>
         </div>
       </ThemeContext.Provider>

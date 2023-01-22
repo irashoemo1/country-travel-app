@@ -1,6 +1,4 @@
-import {
-  NavLink,
-} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 export const Country = ({style, country}) => {
     return(
@@ -10,7 +8,7 @@ export const Country = ({style, country}) => {
           <div className='all-countries-info'>
             <h2>{country.name.common}</h2>
             <h3>Population:{' '} 
-              <span>{country.population}</span>
+              <span>{country.population.toLocaleString(undefined)}</span>
             </h3>
             <h3>Region:{' '}  
               <span>{country.region}</span>
