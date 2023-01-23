@@ -242,3 +242,9 @@ button.back-button a, .border a{
 .daily-items {
   height: 2em;
 }
+
+.no-weather {
+  font-size: 3em;
+  text-align: center;
+  margin: 2em auto;
+}

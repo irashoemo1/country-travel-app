@@ -15,50 +15,47 @@ const CountryInfo = (props)  => {
 
     const {countryName} = useParams()
   
-    const fetchCountryData = async () => {
-      try {
-        const result = await axios(`https://restcountries.com/v3.1/alpha/${countryName}`);
-  
-        setData(result.data);
-        setIsLoading(false)
-        // console.log(result.data)
-        // console.log(typeof result.data[0])
-        currencies = Object.values(result.data[0].currencies).map((c) => c.name).join(', ');
-        languages = Object.values(result.data[0].languages).join(', ')
-        nativeName = Object.values(result.data[0].name.nativeName).map((c) => c.official)[0];
-        borders = result.data[0].borders.map((c) => c)
-        
-        if(Object.keys(result.data).length > 0){
-          await fetchWeather(result.data)
+    //Jan 19 at 1 am to Jan 23 at 10pm. Goes for every 3 hours. Mod by 8 to get everyday
+    useEffect(() => {
+      const fetchCountryData = async () => {
+        try {
+          const result = await axios(`https://restcountries.com/v3.1/alpha/${countryName}`);
+    
+          setData(result.data);
+          setIsLoading(false)
+          // console.log(result.data)
+          languages = Object.values(result.data[0].languages) && Object.values(result.data[0].languages).join(', ')
+          nativeName = Object.values(result.data[0].name.nativeName) && Object.values(result.data[0].name.nativeName).map((c) => c.official)[0];
+          currencies = Object.values(result.data[0].currencies) && Object.values(result.data[0].currencies).map((c) => c.name).join(', ');
+         
+          borders = result.data[0].borders && result.data[0].borders.map((c) => c)
+
+
+          if(Object.keys(result.data).length > 0){
+            await fetchWeather(result.data)
+          }
+          
+        }catch(error){
+          setIsLoading(false)
+          setIsError(error.message)
         }
         
-      }catch(error){
-        setIsLoading(false)
-        setIsError(error.message)
+      };
+
+      const fetchWeather = async (countryData) => {
+        try{
+          const [lat, lng] = countryData[0].latlng
+          const key = 'd4f35e7b6f0b7e9728dff15cfbf1980e'
+          const result = await axios(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&appid=${key}`)
+  
+          setWeather(result.data)
+          // console.log(result.data)
+          setIsLoading(false)
+        }catch(error){
+          setIsLoading(false)
+          setIsError(error.message)
+        }
       }
-      
-    };
-
-    //Jan 19 at 1 am to Jan 23 at 10pm. Goes for every 3 hours. Mod by 8 to get everyday
-    const fetchWeather = async (countryData) => {
-      try{
-        // console.log(countryData[0].latlng)
-        const [lat, lng] = countryData[0].latlng
-        // console.log(lat)
-        // console.log(lng)
-        const key = 'd4f35e7b6f0b7e9728dff15cfbf1980e'
-        const result = await axios(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=imperial&appid=${key}`)
-
-        setWeather(result.data)
-        // console.log(result.data)
-        setIsLoading(false)
-      }catch(error){
-        setIsLoading(false)
-        setIsError(error.message)
-      }
-    }
-
-    useEffect(() => {
       fetchCountryData()
     }, [countryName])
 
@@ -79,7 +76,7 @@ const CountryInfo = (props)  => {
     const nLinkStyle = {
       color: darkTheme ? 'white': ''
     }
-    // console.log(typeof weather)
+
     return (
       <ThemeContext.Provider value={darkTheme}>
         <div style={otherStyles}>
@@ -133,7 +130,7 @@ const CountryInfo = (props)  => {
                 </div> 
               )
             })}
-            {Object.keys(weather).length > 0  && <Weather weather={weather} />}
+            {Object.keys(weather).length > 0  ? <Weather weather={weather} /> : <div className="no-weather">"No weather day exists for this country!"</div>}
           </div>
         </div>
       </ThemeContext.Provider>
