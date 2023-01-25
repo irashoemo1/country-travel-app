@@ -1,9 +1,9 @@
 import Forecast from "./Forecast"
 
 let feels_like, temp
-const Weather = (weatherInfo) => {
+const Weather = (props) => {
     //need to pass the props later
-    const {weather} = weatherInfo
+    const {style, weather} = props
     // console.log(weather)
     if(weather){
         temp = Math.ceil(weather.list[0].main.temp)
@@ -43,7 +43,7 @@ const Weather = (weatherInfo) => {
                     </div>
                 </div>
             </div>}
-            <Forecast weather={weather}/>
+            <Forecast style={style} weather={weather}/>
         </>
     )
 }

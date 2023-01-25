@@ -126,17 +126,33 @@ a {
 
   .country-info {
     padding-left: 5em;
+    width: auto;
   }
 
   .country-info-wrapper .country-flag-wrapper{
     width: auto;
     max-width: 85%;
   }
+
+  div .country-main-info {
+    display: block;
+    height: auto;
+  }
+
+  div .country-main-info h3 {
+    width: auto;
+  }
 }
 
 .country-flag {
   min-height: 20em;
   max-width: 75%;
+}
+
+@media(max-height: 700px) {
+  .country-flag {
+    max-width: 90%;
+  }
 }
 
 .country-main-info {
@@ -204,9 +220,15 @@ button.back-button a, .border a{
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 650px) {
   .weather-info {
     min-width: 55%;
+  }
+}
+
+@media (width > 650px) and (width <= 900px) {
+  .weather-info {
+    max-width: 40%;
   }
 }
 

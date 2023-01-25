@@ -130,7 +130,7 @@ const CountryInfo = (props)  => {
                 </div> 
               )
             })}
-            {Object.keys(weather).length > 0  ? <Weather weather={weather} /> : <div className="no-weather">"No weather day exists for this country!"</div>}
+            {Object.keys(weather).length > 0  ? <Weather style={otherStyles} weather={weather} /> : <div className="no-weather">"No weather day exists for this country!"</div>}
           </div>
         </div>
       </ThemeContext.Provider>

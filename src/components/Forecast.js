@@ -6,11 +6,12 @@ import {
     AccordionItemPanel,
   } from 'react-accessible-accordion';
 
-const Forecast = ({weather}) => {
+const Forecast = (props) => {
     //use JavaScript Date getDay() to get the day today and then add 1 each time to get the next 4 days. returns 0-6(sun-sat)
     const dailyWeather = []
     const date = new Date()
     let day = date.getDay()
+    const {style, weather} = props
     for(let i = 0; i < weather.list.length; i++)
     {
         if(i % 8 === 0){
@@ -26,7 +27,7 @@ const Forecast = ({weather}) => {
                         <AccordionItem>
                             <AccordionItemHeading>
                                 <AccordionItemButton>
-                                    <div className="forecast-info">
+                                    <div style={style} className="forecast-info">
                                         <div className="forecast-weather">
                                             <img className="forecast-pic"  src={`../icons/${fore.weather[0].icon}.png`} alt="weather pic"/>
                                             <p>{numToDay(day++ % 7)}</p>
