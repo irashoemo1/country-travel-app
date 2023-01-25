@@ -19,7 +19,7 @@ const Weather = (weatherInfo) => {
                         <img src={`../icons/${weather.list[0].weather[0].icon}.png`} alt="weather pic" className="weather-image"/>
                     </div>
                     <div className="bottom">
-                        <div>
+                        <div className="temp-div">
                             <span className="temperature">{temp}°F</span>
                         </div>
                         <div className="weather-details">

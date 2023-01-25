@@ -8,6 +8,7 @@ header {
   align-items: center;
   height: 5em;
   border-bottom: 5px solid gray;
+  max-width: 100%;
 }
 
 header h1 {
@@ -22,7 +23,7 @@ header button {
 
 main {
   background-color: #F0F0F0;
-  width: 100%;
+  max-width: 100%;
   min-height: 100px;
   overflow: hidden;
 }
@@ -42,7 +43,7 @@ main {
 
 .searchBar {
   height: 4em;
-  width: 100%;
+  min-width: 100%;
   border-radius: 4px;
   border: none;
   font-size: 1em;
@@ -50,7 +51,7 @@ main {
 
 .region-select {
   height: 4em;
-  width: 50%;
+  min-width: 50%;
   border: none;
 }
 
@@ -59,6 +60,7 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
   min-height: 100px;
+  max-width: 100%;
   overflow: hidden;
   margin: 3em;
 }
@@ -96,7 +98,8 @@ h3 > span {
 }
 
 a {
-  width: 20%;
+  max-width: 17.75em;
+  min-width: 17.75em;
   margin: 2em 0 2em 3em;
   text-decoration: none;
   color: black;
@@ -116,9 +119,24 @@ a {
   padding-left: 4em;
 }
 
+@media(max-width: 1250px) {
+  .country-info-wrapper {
+    display: block;
+  }
+
+  .country-info {
+    padding-left: 5em;
+  }
+
+  .country-info-wrapper .country-flag-wrapper{
+    width: auto;
+    max-width: 85%;
+  }
+}
+
 .country-flag {
-  height: 20em;
-  width: 75%;
+  min-height: 20em;
+  max-width: 75%;
 }
 
 .country-main-info {
@@ -126,6 +144,8 @@ a {
   flex-direction: column;
   flex-wrap: wrap;
   height: 10em;
+  max-width: 100%;
+  column-gap: 2em;
 }
 
 .country-name {
@@ -168,12 +188,26 @@ button.back-button a, .border a{
 }
 
 .weather-info {
-  width: 22.5%;
-  height: 15em;
+  max-width: 22.5%;
+  min-height: 15em;
   background-color: gray;
   margin: 5em auto;
   border-radius: 5px;
   padding: 0 2em;
+}
+
+/* When width gets below 1200px change weather info */
+/* when width gets below 1100px change country info wrapper */
+@media (max-width: 1200px) {
+    .weather-info {
+      min-width: 30%;
+    }
+}
+
+@media (max-width: 850px) {
+  .weather-info {
+    min-width: 55%;
+  }
 }
 
 .top {
@@ -185,11 +219,24 @@ button.back-button a, .border a{
   font-size: 2em;
 }
 
+.weather-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.temp-div {
+  width: auto;
+}
+
 .temperature {
   font-size: 4em;
   letter-spacing: -5px;
-  width: auto;
 }
+
+/* .weather-details {
+  width: 70%;
+  padding-left: 2em;
+} */
 
 .bottom {
   display: flex;
