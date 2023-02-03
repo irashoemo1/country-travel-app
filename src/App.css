@@ -161,7 +161,6 @@ a {
   flex-wrap: wrap;
   height: 10em;
   max-width: 100%;
-  column-gap: 2em;
 }
 
 .country-name {

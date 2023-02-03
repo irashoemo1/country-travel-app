@@ -7,11 +7,12 @@ import Weather from "./Weather";
 
 let currencies, languages, nativeName, borders
 const CountryInfo = (props)  => {
+    const initialState = !!JSON.parse(localStorage.getItem('theme'))
     const [data, setData] = useState([])
     const [weather, setWeather] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(true)
-    const [darkTheme, setDarkTheme] = useState(false)
+    const [darkTheme, setDarkTheme] = useState(initialState)
 
     const {countryName} = useParams()
   
@@ -60,7 +61,10 @@ const CountryInfo = (props)  => {
     }, [countryName])
 
     const toggleTheme = () => {
-      setDarkTheme(prevDarkTheme => !prevDarkTheme)
+      setDarkTheme(prevDarkTheme => {
+        localStorage.setItem('theme', !prevDarkTheme)
+        return !prevDarkTheme
+      })
     }
 
     const themeStyles = {

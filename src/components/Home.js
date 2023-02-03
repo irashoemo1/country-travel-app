@@ -6,12 +6,14 @@ import { Header } from './Header';
 import { Search } from './Search';
 import { ThemeContext } from './ThemeContext';
 
+
 export const Home = () => {
+    const initialState = !!JSON.parse(localStorage.getItem('theme'))
     const [data, setData] = useState([])
     const [searchCountry, setCountry] = useState('')
     const [filteredData, setFiltered] = useState([])
     const [filterRegion, setRegion] = useState('')
-    const [darkTheme, setDarkTheme] = useState(false)
+    const [darkTheme, setDarkTheme] = useState(initialState)
 
     useEffect(() => {
         const url = 'https://restcountries.com/v3.1/all'
@@ -63,7 +65,10 @@ export const Home = () => {
     }
 
     const toggleTheme = () => {
-      setDarkTheme(prevDarkTheme => !prevDarkTheme)
+      setDarkTheme(prevDarkTheme => {
+        localStorage.setItem('theme', !prevDarkTheme)
+        return !prevDarkTheme
+      })
     }
 
     const themeStyles = {
